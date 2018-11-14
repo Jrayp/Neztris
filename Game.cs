@@ -175,9 +175,9 @@ namespace Tetris
 			_nextShapeSprite.setSubtexture( new Nez.Textures.Subtexture( _nextShapeSpriteSheet, shape.SubTextureRect ) );
 		}
 
-		public static void setPoints( int points )
+		public static void setScore( int score )
 		{
-			_scoreTxt.setText( points.ToString( ).PadLeft( 6, '0' ) );
+			_scoreTxt.setText( score.ToString( ).PadLeft( 6, '0' ) );
 		}
 
 		public static void setLines( int lines )

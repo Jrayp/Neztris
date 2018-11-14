@@ -289,9 +289,11 @@ namespace Tetris.GamePieces
 		{
 			_rowSize = new int[ HEIGHT ];
 
+			_score = 0;
+			_lines = 0;
 			_level = 0;
 
-			Game.setPoints( 0 );
+			Game.setScore( 0 );
 			Game.setLines( 0 );
 			Game.setLevel( 0 );
 
@@ -478,7 +480,7 @@ namespace Tetris.GamePieces
 		{
 			foreach( int row in _fullRows )
 			{
-				#region Clear line Debugging
+				#region Shift Row Debugging
 #if DEBUG
 				// Test 1
 				if( step == 0 )
@@ -562,7 +564,7 @@ namespace Tetris.GamePieces
 			if( _score > 999999 )
 				_score = 999999;
 
-			Game.setPoints( _score );
+			Game.setScore( _score );
 		}
 
 		private void scoreLineClear( int nrLines )
