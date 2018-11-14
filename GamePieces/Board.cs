@@ -175,7 +175,7 @@ namespace Tetris.GamePieces
 		}
 
 		//////////////////////////////////////////////////////////////////////////////////////
-		// <<<... [ Update Methods ] ...>>>
+		// <<<... [ Update & Ticks ] ...>>>
 		///////////////////////////////////////////////////
 
 		public override void update( )
@@ -214,6 +214,21 @@ namespace Tetris.GamePieces
 			}
 		}
 
+		private void tick( bool softDrop = false )
+		{
+			tryTransform( Transform.DOWN );
+
+			if( softDrop )
+				addPoints( 1 );
+
+			_tickTimer = _tickTimerMax;
+		}
+
+
+		//////////////////////////////////////////////////////////////////////////////////////
+		// <<<... [ Input ] ...>>>
+		///////////////////////////////////////////////////
+
 		private void handleInput( )
 		{
 			// Left & Right
@@ -240,15 +255,9 @@ namespace Tetris.GamePieces
 				Environment.Exit( 1 );
 		}
 
-		private void tick( bool softDrop = false )
-		{
-			tryTransform( Transform.DOWN );
-
-			if( softDrop )
-				addPoints( 1 );
-
-			_tickTimer = _tickTimerMax;
-		}
+		//////////////////////////////////////////////////////////////////////////////////////
+		// <<<... [ Clear, Reset, Reveal ] ...>>>
+		///////////////////////////////////////////////////
 
 		private void handleRowClear( )
 		{
@@ -385,29 +394,6 @@ namespace Tetris.GamePieces
 			drawShape( true );
 		}
 
-		private void drawShape( bool draw, bool landed = false )
-		{
-			var layout = _currentShape.getLayout( );
-			var width = layout.GetLength( 1 );
-			var height = layout.GetLength( 0 );
-
-			for( int x = 0; x < width; x++ )
-				for( int y = 0; y < height; y++ )
-				{
-					if( layout[ y, x ] > 0 )
-					{
-						var boardX = x + _currentShape.X;
-						var boardY = y + _currentShape.Y;
-
-						var value = draw ? layout[ y, x ] : 0;
-						_tiles[ boardX, boardY ].id = value;
-
-						if( landed )
-							addToRow( boardY );
-					}
-				}
-		}
-
 		private bool tryRotateShape( Rotation rotation )
 		{
 			var wallKickData = _currentShape.getWallKickData( rotation );
@@ -464,9 +450,35 @@ namespace Tetris.GamePieces
 			return false;
 		}
 
+		//////////////////////////////////////////////////////////////////////////////////////
+		// <<<... [ Shape Drawing ] ...>>>
+		///////////////////////////////////////////////////
+
+		private void drawShape( bool draw, bool landed = false )
+		{
+			var layout = _currentShape.getLayout( );
+			var width = layout.GetLength( 1 );
+			var height = layout.GetLength( 0 );
+
+			for( int x = 0; x < width; x++ )
+				for( int y = 0; y < height; y++ )
+				{
+					if( layout[ y, x ] > 0 )
+					{
+						var boardX = x + _currentShape.X;
+						var boardY = y + _currentShape.Y;
+
+						var value = draw ? layout[ y, x ] : 0;
+						_tiles[ boardX, boardY ].id = value;
+
+						if( landed )
+							addToRow( boardY );
+					}
+				}
+		}
 
 		//////////////////////////////////////////////////////////////////////////////////////
-		// <<<... [ Row Clearing ] ...>>>
+		// <<<... [ Row Clearing/Shifting ] ...>>>
 		///////////////////////////////////////////////////
 
 		private void addToRow( int row )

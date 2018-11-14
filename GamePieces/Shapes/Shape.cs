@@ -21,7 +21,7 @@ namespace Tetris.GamePieces
 		// Only one of every shape will be instantiated, so using this method to reduce memory useage 
 		// isnt super beneficial. However, this lends itself better to future extension or design change. 
 
-		protected static Dictionary<ShapeFacing, List<Point>> _wallKickData_Right = new Dictionary<ShapeFacing, List<Point>>
+		protected readonly static Dictionary<ShapeFacing, List<Point>> _wallKickData_Right = new Dictionary<ShapeFacing, List<Point>>
 		{
 			{ ShapeFacing.TOP, new List<Point> { new Point(0,0), new Point(-1,0), new Point(-1,-1), new Point(0,2), new Point(-1,2) } },
 			{ ShapeFacing.RIGHT, new List<Point> { new Point(0,0), new Point(1,0), new Point(1,1), new Point(0,-2), new Point(1,-2) } },
@@ -29,7 +29,7 @@ namespace Tetris.GamePieces
 			{ ShapeFacing.LEFT, new List<Point> { new Point(0,0), new Point(-1,0), new Point(-1,1), new Point(0,-2), new Point(-1,-2) } }
 		};
 
-		protected static Dictionary<ShapeFacing, List<Point>> _wallKickData_Left = new Dictionary<ShapeFacing, List<Point>>
+		protected readonly static Dictionary<ShapeFacing, List<Point>> _wallKickData_Left = new Dictionary<ShapeFacing, List<Point>>
 		{
 			{ ShapeFacing.RIGHT, new List<Point> { new Point(0,0), new Point(1,0), new Point(1,1), new Point(0,-2), new Point(1,-2) } },
 			{ ShapeFacing.BOTTOM, new List<Point> { new Point(0,0), new Point(-1,0), new Point(-1,1), new Point(0,2), new Point(-1,2) } },
@@ -37,7 +37,7 @@ namespace Tetris.GamePieces
 			{ ShapeFacing.TOP, new List<Point> { new Point(0,0), new Point(1,0), new Point(1,-1), new Point(0,2), new Point(1,2) } }
 		};
 
-		protected static Dictionary<ShapeFacing, List<Point>> _wallKickData_Right_I = new Dictionary<ShapeFacing, List<Point>>
+		protected readonly static Dictionary<ShapeFacing, List<Point>> _wallKickData_Right_I = new Dictionary<ShapeFacing, List<Point>>
 		{
 			{ ShapeFacing.TOP, new List<Point> { new Point(0,0), new Point(-2,0), new Point(1,0), new Point(-2,1), new Point(1,-2) } },
 			{ ShapeFacing.RIGHT, new List<Point> { new Point(0,0), new Point(-1,0), new Point(2,0), new Point(-1,-2), new Point(2,1) } },
@@ -45,7 +45,7 @@ namespace Tetris.GamePieces
 			{ ShapeFacing.LEFT, new List<Point> { new Point(0,0), new Point(1,0), new Point(-2,0), new Point(1,2), new Point(-2,-1) } }
 		};
 
-		protected static Dictionary<ShapeFacing, List<Point>> _wallKickData_Left_I = new Dictionary<ShapeFacing, List<Point>>
+		protected readonly static Dictionary<ShapeFacing, List<Point>> _wallKickData_Left_I = new Dictionary<ShapeFacing, List<Point>>
 		{
 			{ ShapeFacing.RIGHT, new List<Point> { new Point(0,0), new Point(2,0), new Point(-1,0), new Point(2,-1), new Point(-1,2) } },
 			{ ShapeFacing.BOTTOM, new List<Point> { new Point(0,0), new Point(1,0), new Point(-2,0), new Point(1,2), new Point(-2,-1) } },
