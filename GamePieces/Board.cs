@@ -249,7 +249,7 @@ namespace Tetris.GamePieces
 
 			// Misc 
 			if( Input.isKeyPressed( Keys.L ) )
-				increaseLevel( );
+				incrementLevel( );
 
 			if( Input.isKeyPressed( Keys.Q ) )
 				Environment.Exit( 1 );
@@ -301,6 +301,8 @@ namespace Tetris.GamePieces
 			_score = 0;
 			_lines = 0;
 			_level = 0;
+
+			setLevel( 0 );
 
 			Game.setScore( 0 );
 			Game.setLines( 0 );
@@ -599,15 +601,20 @@ namespace Tetris.GamePieces
 			Game.setLines( _lines );
 
 			if( _lines >= ( _level + 1 ) * 10 )
-				increaseLevel( );
+				incrementLevel( );
 		}
 
-		private void increaseLevel( )
+		private void incrementLevel( )
 		{
-			_level++;
-			_tickTimerMax = Mathf.roundToInt( Mathf.pow( .8f - ( _level * .007f ), _level ) * 60 );
 			Game.playSound( Sound.LVL_UP );
-			Game.setLevel( _level );
+			setLevel( _level + 1 );
+		}
+
+		private void setLevel( int newLevel )
+		{
+			_level = newLevel;
+			_tickTimerMax = Mathf.roundToInt( Mathf.pow( .8f - ( _level * .007f ), _level ) * 60 );
+			Game.setLevel( newLevel );
 		}
 
 		private void gameOver( )
